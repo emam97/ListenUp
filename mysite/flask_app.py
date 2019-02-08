@@ -28,8 +28,17 @@ def record_call():
     if request.method == "POST":
         response = "Call in progess"
         response = VoiceResponse()
-        response.gather()
-
+        response.say("Start taking notes after the beep, press # when finished.")
+        response.record(play_beep='true', max_length=20, finish_on_key='#', recording_status_callback="/transcribing")
         return str(response)
     else:
         return response
+
+
+@app.route('/transcribing', methods=['GET', 'POST'])
+def transcribing():
+    print(request.values)
+
+    recording_url = request.values.get('RecordingUrl')
+
+    print 'RECORDING URL: ' + str(recording_url)
