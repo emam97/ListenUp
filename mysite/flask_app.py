@@ -43,3 +43,4 @@ def transcribing():
     recording_url = request.values.get('RecordingUrl')
 
     print 'RECORDING URL: ' + str(recording_url)
+    print 'Transcription Id: ' + str(request.values.get('TranscriptionSid'))
