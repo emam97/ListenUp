@@ -30,9 +30,7 @@ def record_call():
         response = VoiceResponse()
         response.say("Start taking notes after the beep, press # when finished.")
         response.record(transcribe=True, play_beep='true', max_length=20, finish_on_key='#', transcribeCallback="/transcribing")
-        transcription = client.transcriptions(account_sid) \
-            .fetch()
-        print("TRANSCRIPTION: " + str(transcription))
+
         return str(response)
     else:
         return response
