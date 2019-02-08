@@ -30,6 +30,5 @@ def record_call():
         response = VoiceResponse()
         response.gather()
 
-        print(response)
-    return response
+        return str(response)
 
