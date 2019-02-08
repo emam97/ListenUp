@@ -24,6 +24,7 @@ client = Client(account_sid, auth_token, http_client=proxy_client)
 
 @app.route("/", methods=["GET", "POST"])
 def record_call():
+    response = "Aye"
     if request.method == "POST":
         response = VoiceResponse()
         response.record(timeout=10, transcribe=True)
