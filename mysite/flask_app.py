@@ -31,5 +31,5 @@ def record_call():
         response.gather()
 
         print(response)
-    return str(response)
+    return response
 
