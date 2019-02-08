@@ -29,7 +29,7 @@ def record_call():
         response = "Call in progess"
         response = VoiceResponse()
         response.say("Start taking notes after the beep, press # when finished.")
-        response.record(transcribe=True, play_beep='true', max_length=20, finish_on_key='#', transcribeCallback="/transcribing")
+        response.record(transcribe=True, transcriptionType='slow' ,play_beep='true', max_length=20, finish_on_key='#', transcribeCallback="/transcribing")
 
         return str(response)
     else:
