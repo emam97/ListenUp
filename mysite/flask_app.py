@@ -7,6 +7,7 @@ from twilio.rest import Client
 from twilio.twiml.messaging_response import Message, MessagingResponse
 import os
 from twilio.http.http_client import TwilioHttpClient
+from twilio.twiml.voice_response import Record, VoiceResponse
 
 
 app = Flask(__name__)
@@ -24,6 +25,9 @@ client = Client(account_sid, auth_token, http_client=proxy_client)
 @app.route("/", methods=["GET", "POST"])
 def record_call():
     if request.method == "POST":
-        print("hi")
-    return 'Listen Up'
+        response = VoiceResponse()
+        response.record(timeout=10, transcribe=True)
+
+        print(response)
+    return str(response)
 
