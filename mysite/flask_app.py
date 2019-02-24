@@ -9,7 +9,10 @@ import os
 from twilio.http.http_client import TwilioHttpClient
 from twilio.twiml.voice_response import Gather, VoiceResponse
 from flask_sqlalchemy import SQLAlchemy
+import urllib
+import speech_recognition as sr
 
+import webbrowser
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -68,6 +71,17 @@ def transcribing():
     print 'Transcription Id: ' + str(request.values.get('TranscriptionSid'))
     print 'Transcription: ' + str(request.values.get('TranscriptionText'))
 
+    filename = 'speech.wav'
+    testfile = urllib.URLopener()
+    testfile.retrieve(recording_url, filename)
+
+    r=sr.Recognizer()
+
+    recording = sr.AudioFile(filename)
+    with recording as source:
+        audio = r.record(source)
+    print r.recognize_google(audio)
+    
     addTranscriptionToDatabase(str(recording_url), str(request.values.get('TranscriptionText')))
     return str(request.values.get('TranscriptionText'))
 
