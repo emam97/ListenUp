@@ -64,9 +64,9 @@ def transcribing():
 
     recording_url = request.values.get('RecordingUrl')
 
-    print "RECORDING URL: " + str(recording_url)
-    print "Transcription Id: " + str(request.values.get('TranscriptionSid'))
-    print "Transcription: " + str(request.values.get('TranscriptionText'))
+    #print "RECORDING URL: " + str(recording_url)
+    #print "Transcription Id: " + str(request.values.get('TranscriptionSid'))
+    #print "Transcription: " + str(request.values.get('TranscriptionText'))
 
     addTranscriptionToDatabase(str(recording_url), str(request.values.get('TranscriptionText')))
     return str(request.values.get('TranscriptionText'))
