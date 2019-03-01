@@ -18,10 +18,10 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="emarin6",
-    password="listenup1",
-    hostname="emarin6.mysql.pythonanywhere-services.com",
-    databasename="emarin6$ListenUp",
+    username="avantij14",
+    password="password1",
+    hostname="avantij14.mysql.pythonanywhere-services.com",
+    databasename="avantij14$ListenUp",
 )
 
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
@@ -46,6 +46,15 @@ class Transcription(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     url = db.Column(db.String(4096))
     transcription = db.Column(db.String(4096))
+
+class Sentiment(db.Model):
+
+    __tablename__ = "sentiments"
+
+    id = db.Column(db.Integer, primary_key=True)
+    noun = db.Column(db.String(4096))
+    pos_count = db.Column(db.String(4096))
+    neg_count = db.Column(db.String(4096))
 
 @app.route("/", methods=["GET", "POST"])
 def record_call():
@@ -85,7 +94,7 @@ def transcribing():
     #printing audio transcription
     print r.recognize_google(audio)
 
-    #next step - add transcription to database 
+    #next step - add transcription to database
     addTranscriptionToDatabase(str(recording_url), str(r.recognize_google(audio)))
     return str(request.values.get('TranscriptionText'))
 
