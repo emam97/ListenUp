@@ -83,7 +83,7 @@ def transcribing():
 
     filename = 'speech.wav'
     #using urllib to get file from twilio url
-    testfile = urllib.urlopen(recording_url)
+    testfile = urllib.request.urlopen(recording_url)
     testfile.retrieve(recording_url, filename)
     # instantiating speech recognition object
     r=sr.Recognizer()
