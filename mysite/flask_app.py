@@ -9,7 +9,7 @@ import os
 from twilio.http.http_client import TwilioHttpClient
 from twilio.twiml.voice_response import Gather, VoiceResponse
 from flask_sqlalchemy import SQLAlchemy
-import urllib
+import urllib2
 import speech_recognition as sr
 
 import webbrowser
@@ -83,7 +83,7 @@ def transcribing():
 
     filename = 'speech.wav'
     #using urllib to get file from twilio url
-    testfile = urllib.URLopener()
+    testfile = urllib2.urlopen(recording_url)
     testfile.retrieve(recording_url, filename)
     # instantiating speech recognition object
     r=sr.Recognizer()
