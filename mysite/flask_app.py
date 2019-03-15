@@ -92,7 +92,7 @@ def transcribing():
     with recording as source:
         audio = r.record(source)
     #printing audio transcription
-    print r.recognize_google(audio)
+    print(r.recognize_google(audio))
 
     #next step - add transcription to database
     addTranscriptionToDatabase(str(recording_url), str(r.recognize_google(audio)))
