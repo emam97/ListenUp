@@ -1,0 +1,63 @@
+{
+    "usage": {
+      "text_units": 1,
+      "text_characters": 182,
+      "features": 2
+    },
+    "language": "en",
+    "keywords": [
+      {
+        "text": "City Hall",
+        "sentiment": {
+          "score": -0.992728,
+          "label": "negative"
+        },
+        "relevance": 0.937632,
+        "emotion": {
+          "sadness": 0.134773,
+          "joy": 0.081814,
+          "fear": 0.061055,
+          "disgust": 0.036402,
+          "anger": 0.848122
+        },
+        "count": 1
+      },
+      {
+        "text": "parking situation",
+        "sentiment": {
+          "score": -0.992728,
+          "label": "negative"
+        },
+        "relevance": 0.88548,
+        "emotion": {
+          "sadness": 0.134773,
+          "joy": 0.081814,
+          "fear": 0.061055,
+          "disgust": 0.036402,
+          "anger": 0.848122
+        },
+        "count": 1
+      }
+    ],
+    "entities": [
+      {
+        "type": "Facility",
+        "text": "City Hall",
+        "sentiment": {
+          "score": -0.992728,
+          "label": "negative"
+        },
+        "relevance": 0.978348,
+        "emotion": {
+          "sadness": 0.134773,
+          "joy": 0.081814,
+          "fear": 0.061055,
+          "disgust": 0.036402,
+          "anger": 0.848122
+        },
+        "count": 1,
+        "confidence": 0.898938
+      }
+    ]
+  }
+  
