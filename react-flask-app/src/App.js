@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import DonutChart from './components/DonutChart';
+import StackedBarChart from './components/StackedBarChart'
+import data from './dummy_data.json';
 import './App.css';
 
 function App() {
@@ -14,20 +16,22 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          ListenUp!
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
-
+      <div className="chart-container">
+          <h3>Chart of Entities</h3>
+          <DonutChart
+            data = {data.entities}
+          />
+      </div>
+      <div className="chart-container">
+          <h3>Chart of Keywords</h3>
+          <StackedBarChart
+            data = {data.keywords}
+          />
+      </div>
       <p>The current time is {currentTime}.</p>
     </div>
   );
