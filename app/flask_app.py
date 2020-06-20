@@ -41,13 +41,12 @@ def record_call():
     if request.method == "POST":
         response = "Call in progess"
         response = VoiceResponse()
-        response.say("Start talking, press # when finished.")
-        response.record(transcribe=True, transcriptionType='slow' ,play_beep='true', max_length=20, finish_on_key='#', transcribeCallback="/transcribing")
+        response.say("This is your local policital office. Please leave your message.")
+        response.record(transcribe=True, play_beep='true', max_length=20, transcribeCallback="/transcribing")
 
         return str(response)
     else:
         return response
-
 
 @app.route('/transcribing', methods=['GET', 'POST'])
 def transcribing():
@@ -66,11 +65,25 @@ def transcribing():
         audio = r.record(source)
     #printing audio transcription
     print(r.recognize_google(audio))
-    analyzeTextSentiment(str(r.recognize_google(audio)))
-    analyzeTextKeywords(str(r.recognize_google(audio)))
+    text_sentiment = analyzeTextSentiment(str(r.recognize_google(audio)))
+    text_keywords = analyzeTextKeywords(str(r.recognize_google(audio)))
+    print(text_sentiment)
+    print(text_keywords)
+    insert_data(str(r.recognize_google(audio)), text_sentiment, text_keywords)
     #next step - add transcription to database
     return str(request.values.get('TranscriptionText'))
 
+@app.route('/analysis', methods=['GET'])
+def get_analysis():
+    documents = collection.find({})
+    all_analyses = []
+    for doc in documents:
+        all_analyses.append(doc)
+    return str(all_analyses)
+
+def insert_data(transcription, sentiment, keywords):
+    document = {"transcription": transcription, "sentiment_api": sentiment, "keyword_api": keywords}
+    x = collection.insert_one(document)
 
 def analyzeTextSentiment(text):
     authenticator = IAMAuthenticator(config['WATSON']['text_analysis_auth'])
@@ -86,7 +99,8 @@ def analyzeTextSentiment(text):
         content_type='application/json'
     ).get_result()
     print(json.dumps(tone_analysis, indent=2))
-    x = collection.insert_one(tone_analysis)
+
+    return tone_analysis
 
 def analyzeTextKeywords(text):
     authenticator = IAMAuthenticator(config['WATSON']['keyword_auth'])
@@ -104,8 +118,8 @@ def analyzeTextKeywords(text):
                                  limit=2))).get_result()
 
     print(json.dumps(response, indent=2))
-    x = collection.insert_one(response)
 
+    return response
 
 if __name__=="__main__":
     app.run()
