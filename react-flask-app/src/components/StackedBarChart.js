@@ -31,4 +31,4 @@ StackedBarChart.propTypes = {
     data: PropTypes.array
 };
 
-export default GroupedBarChart;
+export default StackedBarChart;
